@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
 
       home: Scaffold(
         appBar: AppBar(title: Text("Portfolio")),
-        body: Center(child: Text("Amirali Taherkhany")),
+        body: Center(child: Text("this is Amirali's portfolio")),
       ),
     );
   }
