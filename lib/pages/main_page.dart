@@ -117,6 +117,13 @@ class _AnimatedMyNameState extends State<AnimatedMyName>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controler;
   late final Animation _animation;
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controler.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -197,21 +204,29 @@ class LightedIcon extends StatefulWidget {
 
 class _LightedIconState extends State<LightedIcon> {
   ValueNotifier<bool> ishovered = ValueNotifier(false);
+  void _setHovered(bool isHovered) {
+    if (isHovered) {
+      ishovered.value = true;
+    } else {
+      ishovered.value = false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onHover: (event) {
-        ishovered.value = true;
-      },
-      onExit: (event) {
-        ishovered.value = false;
-      },
-      child: ListenableBuilder(
-        listenable: ishovered,
-        builder: (context, child) => FaIcon(
-          widget.faIcon,
-          color: ishovered.value ? Colors.white : Color(0xFF9C9C9C),
+      onEnter: (_) => _setHovered(true),
+      onExit: (_) => _setHovered(false),
+      child: GestureDetector(
+        onTapDown: (_) => _setHovered(true),
+        onTapUp: (_) => _setHovered(false),
+        onTapCancel: () => _setHovered(false),
+        child: ListenableBuilder(
+          listenable: ishovered,
+          builder: (context, child) => FaIcon(
+            widget.faIcon,
+            color: ishovered.value ? Colors.white : Color(0xFF9C9C9C),
+          ),
         ),
       ),
     );
