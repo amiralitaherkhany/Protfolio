@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_portfolio/constants/link_constants.dart';
 import 'package:my_portfolio/extensions/context_extensions.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
-
+  static const texts = <String>[
+    'Home',
+    'Case Studies',
+    'Testimonials',
+    'Recent work',
+    'Get In Touch',
+  ];
   @override
   Widget build(BuildContext context) {
-    const texts = <String>[
-      'Home',
-      'Case Studies',
-      'Testimonials',
-      'Recent work',
-      'Get In Touch',
-    ];
-    const icons = [
-      FontAwesomeIcons.linkedinIn,
-      FontAwesomeIcons.github,
-      FontAwesomeIcons.telegram,
-    ];
     return Scaffold(
       backgroundColor: Colors.black,
       body: CustomScrollView(
@@ -81,7 +77,10 @@ class MainPage extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 spacing: 15,
                                 children: [
-                                  LightedIcon(faIcon: FontAwesomeIcons.bars),
+                                  LightedIconButton(
+                                    faIcon: FontAwesomeIcons.bars,
+                                    onClick: () {},
+                                  ),
                                   if (context.width > 450) ...{
                                     AnimatedMyName(),
                                   },
@@ -91,7 +90,7 @@ class MainPage extends StatelessWidget {
                         },
                       ),
                       Spacer(),
-                      IconRow(icons: icons),
+                      IconRow(),
                     ],
                   ),
                 ),
@@ -173,10 +172,12 @@ class _AnimatedMyNameState extends State<AnimatedMyName>
 class IconRow extends StatelessWidget {
   const IconRow({
     super.key,
-    required this.icons,
   });
-
-  final List<IconData> icons;
+  void _launchURL(String url) {
+    launchUrl(
+      Uri.parse(url),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -185,24 +186,44 @@ class IconRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       spacing: 25,
       children: [
-        for (var icon in icons) ...{
-          LightedIcon(
-            faIcon: icon,
-          ),
-        },
+        LightedIconButton(
+          faIcon: FontAwesomeIcons.linkedinIn,
+          onClick: () {
+            _launchURL(
+              LinkConstants.myLinkedIn,
+            );
+          },
+        ),
+        LightedIconButton(
+          faIcon: FontAwesomeIcons.github,
+          onClick: () {
+            _launchURL(LinkConstants.myGithub);
+          },
+        ),
+        LightedIconButton(
+          faIcon: FontAwesomeIcons.telegram,
+          onClick: () {
+            _launchURL(LinkConstants.myTelegram);
+          },
+        ),
       ],
     );
   }
 }
 
-class LightedIcon extends StatefulWidget {
-  const LightedIcon({super.key, required this.faIcon});
+class LightedIconButton extends StatefulWidget {
+  const LightedIconButton({
+    super.key,
+    required this.faIcon,
+    required this.onClick,
+  });
   final IconData faIcon;
+  final VoidCallback onClick;
   @override
-  State<LightedIcon> createState() => _LightedIconState();
+  State<LightedIconButton> createState() => _LightedIconButtonState();
 }
 
-class _LightedIconState extends State<LightedIcon> {
+class _LightedIconButtonState extends State<LightedIconButton> {
   ValueNotifier<bool> ishovered = ValueNotifier(false);
   void _setHovered(bool isHovered) {
     if (isHovered) {
@@ -223,9 +244,12 @@ class _LightedIconState extends State<LightedIcon> {
         onTapCancel: () => _setHovered(false),
         child: ListenableBuilder(
           listenable: ishovered,
-          builder: (context, child) => FaIcon(
-            widget.faIcon,
-            color: ishovered.value ? Colors.white : Color(0xFF9C9C9C),
+          builder: (context, child) => IconButton(
+            onPressed: widget.onClick,
+            icon: FaIcon(
+              widget.faIcon,
+              color: ishovered.value ? Colors.white : Color(0xFF9C9C9C),
+            ),
           ),
         ),
       ),
