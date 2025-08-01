@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -18,6 +19,7 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="A new Flutter project.">
 
   <!-- iOS meta tags & icons -->
@@ -27,12 +29,57 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <title>my_portfolio</title>
   <link rel="manifest" href="manifest.json">
+  <style>
+    .container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .indicator {
+      width: 50vw;
+      max-width: 300px;
+      height: auto;
+    }
+
+
+    @media (max-width: 600px) {
+      .indicator {
+        width: 70vw;
+        max-width: 90vw;
+      }
+    }
+  </style>
 </head>
-<body>
+
+<body style="overflow: hidden;">
+  <div id="loading_indicator" class="container">
+    <img class="indicator" src="./assets/loading.gif" alt="">
+  </div>
+  <style>
+    body {
+      background-color: black;
+    }
+  </style>
   <script src="flutter_bootstrap.js" async></script>
+  <script>
+    window.onload = function () {
+      setTimeout(
+        function () {
+          var loadingIndicator = document.getElementById("loading_indicator")
+          if (loadingIndicator) {
+            loadingIndicator.remove()
+          }
+        }, 10000
+      )
+    }
+  </script>
 </body>
+
 </html>
