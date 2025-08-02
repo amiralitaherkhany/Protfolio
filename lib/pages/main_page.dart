@@ -6,6 +6,146 @@ import 'package:url_launcher/url_launcher.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Padding(
+        padding: EdgeInsetsGeometry.symmetric(
+          horizontal: context.width * 6 / 100,
+        ),
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: MainHeader(),
+            ),
+            SliverPadding(
+              padding: EdgeInsetsGeometry.only(
+                top: 80,
+                bottom: 57,
+                right: context.width * 5 / 100,
+                left: context.width * 5 / 100,
+              ),
+              sliver: MyInformation(),
+            ),
+            SliverList.builder(
+              itemBuilder: (context, index) {
+                return Text(
+                  "1",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                );
+              },
+              itemCount: 100,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MyInformation extends StatelessWidget {
+  const MyInformation({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    switch (context.width) {
+      case >= 1500:
+        return SliverToBoxAdapter(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              NameAndInfoSection(),
+              SizedBox(
+                width: context.width * 15 / 100,
+              ),
+              MyAvatar(),
+            ],
+          ),
+        );
+      default:
+        return SliverList(
+          delegate: SliverChildListDelegate(
+            [
+              MyAvatar(),
+              SizedBox(
+                height: 50,
+              ),
+              NameAndInfoSection(),
+            ],
+          ),
+        );
+    }
+  }
+}
+
+class MyAvatar extends StatelessWidget {
+  const MyAvatar({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 300,
+      height: 300,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        image: DecorationImage(
+          fit: BoxFit.contain,
+          image: AssetImage(
+            "assets/logo.jpg",
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class NameAndInfoSection extends StatelessWidget {
+  const NameAndInfoSection({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: context.width * 35 / 100,
+      // color: Colors.red,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 20,
+        children: [
+          Text(
+            "Amirali Taherkhany",
+            style: TextStyle(
+              fontSize: 60,
+              color: Colors.white,
+            ),
+          ),
+          Text(
+            """Passionate and results-driven Android and Flutter Developer with a strong foundation in mobile application. Proficient in building high- performance, scalable applications using Kotlin for native Android (Jetpack Compose) and Flutter/Dart for cross-platform development.""",
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 25,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MainHeader extends StatelessWidget {
+  const MainHeader({
+    super.key,
+  });
   static const texts = <String>[
     'Home',
     'Case Studies',
@@ -15,89 +155,77 @@ class MainPage extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: ClipRSuperellipse(
-              borderRadius: BorderRadiusGeometry.only(
-                bottomRight: Radius.circular(10),
-                bottomLeft: Radius.circular(10),
-              ),
-              child: Container(
-                height: 70,
-                margin: EdgeInsetsGeometry.symmetric(
-                  horizontal: context.width * 6 / 100,
-                ),
-                decoration: ShapeDecoration(
-                  color: Color(0xFF1B1B1B),
-                  shape: RoundedSuperellipseBorder(
-                    borderRadius: BorderRadiusGeometry.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
-                  ),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: context.width * 5 / 100,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Builder(
-                        builder: (context) {
-                          switch (context.width) {
-                            case >= 1150:
-                              return Row(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                spacing: context.width * 5 / 100,
-                                children: [
-                                  for (var text in texts) ...{
-                                    Text(
-                                      text,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Color(0xFF9C9C9C),
-                                      ),
-                                    ),
-                                  },
-                                ],
-                              );
-                            default:
-                              return Row(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                spacing: 15,
-                                children: [
-                                  LightedIconButton(
-                                    faIcon: FontAwesomeIcons.bars,
-                                    onClick: () {},
-                                  ),
-                                  if (context.width > 450) ...{
-                                    AnimatedMyName(),
-                                  },
-                                ],
-                              );
-                          }
-                        },
-                      ),
-                      Spacer(),
-                      IconRow(),
-                    ],
-                  ),
-                ),
-              ),
+    return ClipRSuperellipse(
+      borderRadius: BorderRadiusGeometry.only(
+        bottomRight: Radius.circular(10),
+        bottomLeft: Radius.circular(10),
+      ),
+      child: Container(
+        height: 70,
+        decoration: ShapeDecoration(
+          color: Color(0xFF1B1B1B),
+          shape: RoundedSuperellipseBorder(
+            borderRadius: BorderRadiusGeometry.only(
+              bottomLeft: Radius.circular(10),
+              bottomRight: Radius.circular(10),
             ),
           ),
-        ],
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: context.width * 5 / 100,
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Builder(
+                builder: (context) {
+                  switch (context.width) {
+                    case >= 1150:
+                      return Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        spacing: context.width * 5 / 100,
+                        children: [
+                          for (var text in texts) ...{
+                            Text(
+                              text,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Color(0xFF9C9C9C),
+                              ),
+                            ),
+                          },
+                        ],
+                      );
+                    default:
+                      return Row(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        spacing: 15,
+                        children: [
+                          LightedIconButton(
+                            faIcon: FontAwesomeIcons.bars,
+                            onClick: () {},
+                          ),
+                          if (context.width > 450) ...{
+                            AnimatedMyName(),
+                          },
+                        ],
+                      );
+                  }
+                },
+              ),
+              Spacer(),
+              IconRow(),
+            ],
+          ),
+        ),
       ),
     );
   }
