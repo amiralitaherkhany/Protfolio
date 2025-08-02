@@ -119,8 +119,8 @@ class _AnimatedMyNameState extends State<AnimatedMyName>
 
   @override
   void dispose() {
-    super.dispose();
     _controler.dispose();
+    super.dispose();
   }
 
   @override
@@ -148,11 +148,11 @@ class _AnimatedMyNameState extends State<AnimatedMyName>
         ),
       ],
     ).animate(_controler);
+    _controler.repeat();
   }
 
   @override
   Widget build(BuildContext context) {
-    _controler.repeat();
     return AnimatedBuilder(
       animation: _controler,
       builder: (context, child) {
