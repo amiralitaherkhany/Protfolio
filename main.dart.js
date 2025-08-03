@@ -59385,7 +59385,7 @@ A.y4.prototype={
 R(a){return new A.rp(new A.AL(null),"Amirali's Portfolio",!1,null)}}
 A.AL.prototype={
 R(a){var s=null,r=t.w,q=A.bW(a,B.aA,r).w.a.a*6/100,p=A.bW(a,B.aA,r).w
-p=A.c([new A.u1(new A.AK(s),s),new A.Dd(new A.bJ(A.bW(a,B.aA,r).w.a.a*5/100,80,p.a.a*5/100,57),new A.AZ(s),s),new A.u_(new A.Yi(new A.QW(),100,!0,!0,!0,s),s)],t.F)
+p=A.c([new A.u1(new A.AK(s),s),new A.Dd(new A.bJ(A.bW(a,B.aA,r).w.a.a*5/100,60,p.a.a*5/100,60),new A.AZ(s),s),new A.u_(new A.Yi(new A.QW(),100,!0,!0,!0,s),s)],t.F)
 return new A.tx(new A.jk(new A.bJ(q,0,q,0),new A.z4(p,B.c9,!1,s,s,B.vp,s,!1,s,0,s,s,B.aL,s,s,B.af,B.at,s),s),B.m,s)}}
 A.QW.prototype={
 $2(a,b){var s=null
