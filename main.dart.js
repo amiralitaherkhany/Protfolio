@@ -59397,7 +59397,7 @@ if(A.bW(a,B.aA,r).w.a.a>=1500)return new A.u1(A.Co(A.c([new A.rD(s),A.a7m(s,s,A.
 return new A.u_(new A.Yk(A.c([new A.rC(s),A.a7m(s,50,s),new A.rD(s)],t.F),A.ax([null,0],t.st,t.S)),s)}}
 A.rC.prototype={
 R(a){var s=null
-return A.a9x(s,new A.f7(s,new A.mv(new A.pr("assets/logo.jpg"),B.vG),s,s,s,s,B.eK),300,s,s,300)}}
+return A.a9x(s,new A.f7(s,new A.mv(new A.pr("assets/profile.png"),B.vG),s,s,s,s,B.eK),300,s,s,300)}}
 A.rD.prototype={
 R(a){var s=null,r=A.bW(a,B.aA,t.w).w
 return A.a7m(new A.yS(B.c9,B.bM,B.cM,B.bi,s,B.uZ,s,20,A.c([A.Dw("Amirali Taherkhany",A.id(s,s,B.j,s,s,s,s,s,s,s,s,60,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s),A.Dw("Passionate and results-driven Android and Flutter Developer with a strong foundation in mobile application. Proficient in building high- performance, scalable applications using Kotlin for native Android (Jetpack Compose) and Flutter/Dart for cross-platform development.",A.id(s,s,B.CA,s,s,s,s,s,s,s,s,25,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s)],t.F),s),s,r.a.a*35/100)}}
