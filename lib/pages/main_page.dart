@@ -22,8 +22,8 @@ class MainPage extends StatelessWidget {
             ),
             SliverPadding(
               padding: EdgeInsetsGeometry.only(
-                top: 80,
-                bottom: 57,
+                top: 60,
+                bottom: 60,
                 right: context.width * 5 / 100,
                 left: context.width * 5 / 100,
               ),
