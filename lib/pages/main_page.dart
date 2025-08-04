@@ -99,7 +99,7 @@ class MyAvatar extends StatelessWidget {
         image: DecorationImage(
           fit: BoxFit.contain,
           image: AssetImage(
-            "assets/logo.jpg",
+            "assets/profile.png",
           ),
         ),
       ),
