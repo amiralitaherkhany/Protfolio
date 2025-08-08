@@ -13,7 +13,7 @@ class MainPage extends StatelessWidget {
       backgroundColor: Colors.black,
       body: Padding(
         padding: EdgeInsetsGeometry.symmetric(
-          horizontal: context.width * 6 / 100,
+          horizontal: context.percentageOfWidth(6),
         ),
         child: CustomScrollView(
           slivers: [
@@ -24,8 +24,8 @@ class MainPage extends StatelessWidget {
               padding: EdgeInsetsGeometry.only(
                 top: 60,
                 bottom: 60,
-                right: context.width * 5 / 100,
-                left: context.width * 5 / 100,
+                right: context.percentageOfWidth(5),
+                left: context.percentageOfWidth(5),
               ),
               sliver: MyInformation(),
             ),
@@ -62,7 +62,7 @@ class MyInformation extends StatelessWidget {
             children: [
               NameAndInfoSection(),
               SizedBox(
-                width: context.width * 15 / 100,
+                width: context.percentageOfWidth(15),
               ),
               MyAvatar(),
             ],
@@ -115,7 +115,7 @@ class NameAndInfoSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: context.width * 35 / 100,
+      width: context.percentageOfWidth(35),
       // color: Colors.red,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -178,7 +178,7 @@ class MainHeader extends StatelessWidget {
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: context.width * 5 / 100,
+            horizontal: context.percentageOfWidth(5),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.max,
@@ -193,7 +193,7 @@ class MainHeader extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        spacing: context.width * 5 / 100,
+                        spacing: context.percentageOfWidth(5),
                         children: [
                           for (var headerLink in HeaderLinks.values) ...{
                             Text(
