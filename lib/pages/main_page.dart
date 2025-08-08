@@ -142,17 +142,22 @@ class NameAndInfoSection extends StatelessWidget {
   }
 }
 
+enum HeaderLinks {
+  home(name: 'Home', link: ""),
+  caseStudies(name: 'Case Studies', link: ""),
+  testimonials(name: 'Testimonials', link: ""),
+  recentWork(name: 'Recent work', link: ""),
+  getInTouch(name: 'Get In Touch', link: "");
+
+  const HeaderLinks({required this.name, required this.link});
+  final String name;
+  final String link;
+}
+
 class MainHeader extends StatelessWidget {
   const MainHeader({
     super.key,
   });
-  static const texts = <String>[
-    'Home',
-    'Case Studies',
-    'Testimonials',
-    'Recent work',
-    'Get In Touch',
-  ];
   @override
   Widget build(BuildContext context) {
     return ClipRSuperellipse(
@@ -190,9 +195,9 @@ class MainHeader extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         spacing: context.width * 5 / 100,
                         children: [
-                          for (var text in texts) ...{
+                          for (var headerLink in HeaderLinks.values) ...{
                             Text(
-                              text,
+                              headerLink.name,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 20,
@@ -209,9 +214,30 @@ class MainHeader extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         spacing: 15,
                         children: [
-                          LightedIconButton(
-                            faIcon: FontAwesomeIcons.bars,
-                            onClick: () {},
+                          PopupMenuButton<HeaderLinks>(
+                            color: Color(0xFF1B1B1B),
+                            icon: Icon(
+                              FontAwesomeIcons.bars,
+                              color: Color(0xFF9C9C9C),
+                            ),
+                            onSelected: (value) {
+                              debugPrint(value.name);
+                            },
+                            itemBuilder: (context) => [
+                              for (var headerLink in HeaderLinks.values) ...{
+                                PopupMenuItem(
+                                  value: headerLink,
+                                  child: Text(
+                                    headerLink.name,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Color(0xFF9C9C9C),
+                                    ),
+                                  ),
+                                ),
+                              },
+                            ],
                           ),
                           if (context.width > 450) ...{
                             AnimatedMyName(),
