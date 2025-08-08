@@ -61994,7 +61994,7 @@ R(a){var s=null
 return A.a8D(s,new A.em(s,new A.mZ(new A.q8("assets/profile.png"),B.w1),s,s,s,s,B.eW),300,s,s,300)}}
 A.tm.prototype={
 R(a){var s=null,r=A.bO(a,B.aF,t.w).w
-return A.a_8(new A.A9(B.aH,B.bZ,B.cY,B.bs,s,B.vh,s,20,A.c([A.vg("Amirali Taherkhany",A.hu(s,s,B.j,s,s,s,s,s,s,s,s,60,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s),A.vg("Passionate and results-driven Android and Flutter Developer with a strong foundation in mobile application. Proficient in building high- performance, scalable applications using Kotlin for native Android (Jetpack Compose) and Flutter/Dart for cross-platform development.",A.hu(s,s,B.Dc,s,s,s,s,s,s,s,s,25,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s)],t.E),s),s,r.a.a*35/100)}}
+return A.a_8(new A.A9(B.aH,B.bZ,B.cY,B.bs,s,B.vh,s,20,A.c([A.vg("Amirali Taherkhany",A.hu(s,s,B.j,s,s,s,s,s,s,s,s,52,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s),A.vg("Passionate and results-driven Android and Flutter Developer with a strong foundation in mobile application. Proficient in building high- performance, scalable applications using Kotlin for native Android (Jetpack Compose) and Flutter/Dart for cross-platform development.",A.hu(s,s,B.Dc,s,s,s,s,s,s,s,s,25,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s)],t.E),s),s,r.a.a*35/100)}}
 A.dz.prototype={
 G(){return"HeaderLinks."+this.b}}
 A.C_.prototype={
