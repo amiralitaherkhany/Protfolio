@@ -125,7 +125,7 @@ class NameAndInfoSection extends StatelessWidget {
           Text(
             "Amirali Taherkhany",
             style: TextStyle(
-              fontSize: 60,
+              fontSize: 52,
               color: Colors.white,
             ),
           ),
