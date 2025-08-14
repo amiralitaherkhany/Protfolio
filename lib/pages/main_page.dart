@@ -120,7 +120,6 @@ class NameAndInfoSection extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 20,
         children: [
           Text(
             "Amirali Taherkhany",
@@ -128,6 +127,16 @@ class NameAndInfoSection extends StatelessWidget {
               fontSize: 52,
               color: Colors.white,
             ),
+          ),
+          Text(
+            "Software Developer",
+            style: TextStyle(
+              fontSize: 30,
+              color: Colors.grey,
+            ),
+          ),
+          SizedBox(
+            height: 50,
           ),
           Text(
             """Passionate and results-driven Android and Flutter Developer with a strong foundation in mobile application. Proficient in building high- performance, scalable applications using Kotlin for native Android (Jetpack Compose) and Flutter/Dart for cross-platform development.""",
