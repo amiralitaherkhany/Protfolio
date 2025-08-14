@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio/constants/link_constants.dart';
 import 'package:my_portfolio/extensions/context_extensions.dart';
@@ -29,6 +30,31 @@ class MainPage extends StatelessWidget {
               ),
               sliver: MyInformation(),
             ),
+            SliverToBoxAdapter(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Skills",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 52,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return MySkillBar(
+                    skill: Skill.values[index],
+                  );
+                },
+                childCount: Skill.values.length,
+              ),
+            ),
             SliverList.builder(
               itemBuilder: (context, index) {
                 return Text(
@@ -42,6 +68,57 @@ class MainPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+enum Skill {
+  dart(percentage: 0.8),
+  flutter(percentage: 0.8),
+  kotlin(percentage: 0.6),
+  go(percentage: 0.4),
+  git(percentage: 0.4),
+  github(percentage: 0.6),
+  githubactions(percentage: 0.5);
+
+  const Skill({required this.percentage});
+
+  final double percentage;
+}
+
+class MySkillBar extends StatelessWidget {
+  const MySkillBar({
+    super.key,
+    required this.skill,
+  });
+
+  final Skill skill;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            "assets/${skill.name}.svg",
+            width: 50,
+            height: 50,
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          SizedBox(
+            width: context.percentageOfWidth(60),
+            child: LinearProgressIndicator(
+              color: Colors.lightBlueAccent,
+              backgroundColor: Colors.grey,
+              value: skill.percentage,
+            ),
+          ),
+        ],
       ),
     );
   }
