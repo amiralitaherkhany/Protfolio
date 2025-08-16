@@ -101,21 +101,34 @@ class MySkillBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 20.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        spacing: 20,
         children: [
-          SvgPicture.asset(
-            "assets/${skill.name}.svg",
-            width: 50,
-            height: 50,
-          ),
-          SizedBox(
-            width: 20,
+          Container(
+            padding: EdgeInsets.all(10),
+            decoration: ShapeDecoration(
+              shape: RoundedSuperellipseBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              color: Colors.white,
+            ),
+            child: Center(
+              child: Center(
+                child: SvgPicture.asset(
+                  "assets/${skill.name}.svg",
+                  width: 40,
+                  height: 40,
+                ),
+              ),
+            ),
           ),
           SizedBox(
             width: context.percentageOfWidth(60),
             child: LinearProgressIndicator(
-              color: Colors.lightBlueAccent,
-              backgroundColor: Colors.grey,
+              color: Colors.indigoAccent,
+              backgroundColor: Colors.white,
               value: skill.percentage,
+              minHeight: 9,
+              borderRadius: BorderRadius.circular(20),
             ),
           ),
         ],
@@ -274,7 +287,7 @@ class MainHeader extends StatelessWidget {
               Builder(
                 builder: (context) {
                   switch (context.width) {
-                    case >= 1150:
+                    case >= 1200:
                       return Row(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -325,7 +338,7 @@ class MainHeader extends StatelessWidget {
                               },
                             ],
                           ),
-                          if (context.width > 450) ...{
+                          if (context.width > 530) ...{
                             AnimatedMyName(),
                           },
                         ],
