@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:my_portfolio/extensions/context_extensions.dart';
+
+class MySkillBar extends StatelessWidget {
+  const MySkillBar({
+    super.key,
+    required this.skill,
+  });
+
+  final Skill skill;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        spacing: 20,
+        children: [
+          Container(
+            padding: EdgeInsets.all(10),
+            decoration: ShapeDecoration(
+              shape: RoundedSuperellipseBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              color: Colors.white,
+            ),
+            child: Center(
+              child: Center(
+                child: SvgPicture.asset(
+                  "assets/${skill.name}.svg",
+                  width: 40,
+                  height: 40,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: context.percentageOfWidth(60),
+            child: LinearProgressIndicator(
+              color: Colors.indigoAccent,
+              backgroundColor: Colors.white,
+              value: skill.percentage,
+              minHeight: 9,
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+enum Skill {
+  dart(percentage: 0.8),
+  flutter(percentage: 0.8),
+  kotlin(percentage: 0.6),
+  go(percentage: 0.4),
+  git(percentage: 0.4),
+  github(percentage: 0.6),
+  githubactions(percentage: 0.5);
+
+  const Skill({required this.percentage});
+
+  final double percentage;
+}

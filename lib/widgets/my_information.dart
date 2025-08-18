@@ -1,0 +1,84 @@
+import 'package:flutter/material.dart';
+import 'package:my_portfolio/extensions/context_extensions.dart';
+import 'package:my_portfolio/widgets/my_avatar.dart';
+
+class MyInformation extends StatelessWidget {
+  const MyInformation({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    switch (context.width) {
+      case >= 1500:
+        return SliverToBoxAdapter(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              NameAndInfoSection(),
+              SizedBox(
+                width: context.percentageOfWidth(15),
+              ),
+              MyAvatar(),
+            ],
+          ),
+        );
+      default:
+        return SliverList(
+          delegate: SliverChildListDelegate(
+            [
+              MyAvatar(),
+              SizedBox(
+                height: 50,
+              ),
+              NameAndInfoSection(),
+            ],
+          ),
+        );
+    }
+  }
+}
+
+class NameAndInfoSection extends StatelessWidget {
+  const NameAndInfoSection({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: context.percentageOfWidth(35),
+      // color: Colors.red,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Amirali Taherkhany",
+            style: TextStyle(
+              fontSize: 52,
+              color: Colors.white,
+            ),
+          ),
+          Text(
+            "Software Developer",
+            style: TextStyle(
+              fontSize: 30,
+              color: Colors.grey,
+            ),
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          Text(
+            """Passionate and results-driven Android and Flutter Developer with a strong foundation in mobile application. Proficient in building high- performance, scalable applications using Kotlin for native Android (Jetpack Compose) and Flutter/Dart for cross-platform development.""",
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 25,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
