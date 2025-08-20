@@ -48,16 +48,26 @@ class NameAndInfoSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: context.percentageOfWidth(35),
-      // color: Colors.red,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Amirali Taherkhany",
-            style: TextStyle(
-              fontSize: 52,
-              color: Colors.white,
+          RichText(
+            text: TextSpan(
+              text: "Amirali ",
+              style: TextStyle(
+                fontSize: 52,
+                color: Colors.white,
+              ),
+              children: [
+                TextSpan(
+                  text: "Taherkhany",
+                  style: TextStyle(
+                    fontSize: 52,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
           ),
           Text(
