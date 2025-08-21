@@ -54,6 +54,21 @@ class MainPage extends StatelessWidget {
                 childCount: Skill.values.length,
               ),
             ),
+            SliverToBoxAdapter(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Projects",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 52,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
