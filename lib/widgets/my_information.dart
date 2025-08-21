@@ -16,9 +16,7 @@ class MyInformation extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               NameAndInfoSection(),
-              SizedBox(
-                width: context.percentageOfWidth(15),
-              ),
+              Spacer(),
               MyAvatar(),
             ],
           ),
