@@ -54,17 +54,6 @@ class MainPage extends StatelessWidget {
                 childCount: Skill.values.length,
               ),
             ),
-            SliverList.builder(
-              itemBuilder: (context, index) {
-                return Text(
-                  "1",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                );
-              },
-              itemCount: 100,
-            ),
           ],
         ),
       ),
