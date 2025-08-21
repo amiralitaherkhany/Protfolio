@@ -13,7 +13,10 @@ class MySkillBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      padding: EdgeInsets.symmetric(
+        vertical: 20.0,
+        horizontal: context.percentageOfWidth(10),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         spacing: 20,
@@ -36,8 +39,7 @@ class MySkillBar extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            width: context.percentageOfWidth(60),
+          Expanded(
             child: LinearProgressIndicator(
               color: Colors.indigoAccent,
               backgroundColor: Colors.white,
