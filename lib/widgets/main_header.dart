@@ -10,96 +10,104 @@ class MainHeader extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return ClipRSuperellipse(
-      borderRadius: BorderRadiusGeometry.only(
-        bottomRight: Radius.circular(10),
-        bottomLeft: Radius.circular(10),
-      ),
-      child: Container(
-        height: 70,
-        decoration: ShapeDecoration(
-          color: Color(0xFF1B1B1B),
-          shape: RoundedSuperellipseBorder(
-            borderRadius: BorderRadiusGeometry.only(
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10),
-            ),
-          ),
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: EdgeInsetsGeometry.symmetric(
+          horizontal: context.percentageOfWidth(6),
         ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: context.percentageOfWidth(5),
+        child: ClipRSuperellipse(
+          borderRadius: BorderRadiusGeometry.only(
+            bottomRight: Radius.circular(10),
+            bottomLeft: Radius.circular(10),
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Builder(
-                builder: (context) {
-                  switch (context.width) {
-                    case >= 1200:
-                      return Row(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        spacing: context.percentageOfWidth(5),
-                        children: [
-                          for (var headerLink in HeaderLinks.values) ...{
-                            Text(
-                              headerLink.name,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Color(0xFF9C9C9C),
-                              ),
-                            ),
-                          },
-                        ],
-                      );
-                    default:
-                      return Row(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        spacing: 15,
-                        children: [
-                          PopupMenuButton<HeaderLinks>(
-                            color: Color(0xFF1B1B1B),
-                            icon: Icon(
-                              FontAwesomeIcons.bars,
-                              color: Color(0xFF9C9C9C),
-                            ),
-                            onSelected: (value) {
-                              debugPrint(value.name);
-                            },
-                            itemBuilder: (context) => [
+          child: Container(
+            height: 70,
+            decoration: ShapeDecoration(
+              color: Color(0xFF1B1B1B),
+              shape: RoundedSuperellipseBorder(
+                borderRadius: BorderRadiusGeometry.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+              ),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: context.percentageOfWidth(5),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Builder(
+                    builder: (context) {
+                      switch (context.width) {
+                        case >= 1200:
+                          return Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            spacing: context.percentageOfWidth(5),
+                            children: [
                               for (var headerLink in HeaderLinks.values) ...{
-                                PopupMenuItem(
-                                  value: headerLink,
-                                  child: Text(
-                                    headerLink.name,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Color(0xFF9C9C9C),
-                                    ),
+                                Text(
+                                  headerLink.name,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Color(0xFF9C9C9C),
                                   ),
                                 ),
                               },
                             ],
-                          ),
-                          if (context.width > 530) ...{
-                            AnimatedMyName(),
-                          },
-                        ],
-                      );
-                  }
-                },
+                          );
+                        default:
+                          return Row(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            spacing: 15,
+                            children: [
+                              PopupMenuButton<HeaderLinks>(
+                                color: Color(0xFF1B1B1B),
+                                icon: Icon(
+                                  FontAwesomeIcons.bars,
+                                  color: Color(0xFF9C9C9C),
+                                ),
+                                onSelected: (value) {
+                                  debugPrint(value.name);
+                                },
+                                itemBuilder: (context) => [
+                                  for (var headerLink
+                                      in HeaderLinks.values) ...{
+                                    PopupMenuItem(
+                                      value: headerLink,
+                                      child: Text(
+                                        headerLink.name,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          color: Color(0xFF9C9C9C),
+                                        ),
+                                      ),
+                                    ),
+                                  },
+                                ],
+                              ),
+                              if (context.width > 530) ...{
+                                AnimatedMyName(),
+                              },
+                            ],
+                          );
+                      }
+                    },
+                  ),
+                  Spacer(),
+                  IconRow(),
+                ],
               ),
-              Spacer(),
-              IconRow(),
-            ],
+            ),
           ),
         ),
       ),
@@ -188,7 +196,7 @@ class IconRow extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
-      spacing: 25,
+      spacing: 10,
       children: [
         LightedIconButton(
           faIcon: FontAwesomeIcons.linkedinIn,
