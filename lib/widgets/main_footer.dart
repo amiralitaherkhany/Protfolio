@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_portfolio/theme/dark_colors.dart';
 
 class MainFooter extends StatelessWidget {
   const MainFooter({super.key});
@@ -7,8 +8,7 @@ class MainFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: ShapeDecoration(
-        color: Colors.white,
-
+        color: DarkColors.onBackgroundColor,
         shape: RoundedSuperellipseBorder(
           borderRadius: BorderRadiusGeometry.only(
             topLeft: Radius.circular(10),

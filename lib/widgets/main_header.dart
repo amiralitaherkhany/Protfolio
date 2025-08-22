@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio/constants/link_constants.dart';
 import 'package:my_portfolio/extensions/context_extensions.dart';
+import 'package:my_portfolio/theme/dark_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MainHeader extends StatelessWidget {
@@ -23,7 +24,7 @@ class MainHeader extends StatelessWidget {
           child: Container(
             height: 70,
             decoration: ShapeDecoration(
-              color: Color(0xFF1B1B1B),
+              color: DarkColors.onBackgroundColor,
               shape: RoundedSuperellipseBorder(
                 borderRadius: BorderRadiusGeometry.only(
                   bottomLeft: Radius.circular(10),
@@ -56,7 +57,7 @@ class MainHeader extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 20,
-                                    color: Color(0xFF9C9C9C),
+                                    color: DarkColors.myGrey,
                                   ),
                                 ),
                               },
@@ -70,10 +71,10 @@ class MainHeader extends StatelessWidget {
                             spacing: 15,
                             children: [
                               PopupMenuButton<HeaderLinks>(
-                                color: Color(0xFF1B1B1B),
+                                color: DarkColors.onBackgroundColor,
                                 icon: Icon(
                                   FontAwesomeIcons.bars,
-                                  color: Color(0xFF9C9C9C),
+                                  color: DarkColors.myGrey,
                                 ),
                                 onSelected: (value) {
                                   debugPrint(value.name);
@@ -88,7 +89,7 @@ class MainHeader extends StatelessWidget {
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 20,
-                                          color: Color(0xFF9C9C9C),
+                                          color: DarkColors.myGrey,
                                         ),
                                       ),
                                     ),
@@ -146,15 +147,15 @@ class _AnimatedMyNameState extends State<AnimatedMyName>
       [
         TweenSequenceItem(
           tween: ColorTween(
-            begin: Colors.white,
-            end: Color(0xFF9C9C9C),
+            begin: DarkColors.myWhite,
+            end: DarkColors.myGrey,
           ),
           weight: 1,
         ),
         TweenSequenceItem(
           tween: ColorTween(
-            begin: Color(0xFF9C9C9C),
-            end: Colors.white,
+            begin: DarkColors.myGrey,
+            end: DarkColors.myWhite,
           ),
           weight: 1,
         ),
@@ -260,7 +261,7 @@ class _LightedIconButtonState extends State<LightedIconButton> {
             onPressed: widget.onClick,
             icon: FaIcon(
               widget.faIcon,
-              color: ishovered.value ? Colors.white : Color(0xFF9C9C9C),
+              color: ishovered.value ? DarkColors.myWhite : DarkColors.myGrey,
             ),
           ),
         ),

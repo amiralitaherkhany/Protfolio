@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_portfolio/extensions/context_extensions.dart';
+import 'package:my_portfolio/theme/dark_colors.dart';
 import 'package:my_portfolio/widgets/my_avatar.dart';
 
 class MyInformation extends StatelessWidget {
@@ -55,14 +56,14 @@ class NameAndInfoSection extends StatelessWidget {
               text: "Amirali ",
               style: TextStyle(
                 fontSize: 52,
-                color: Colors.white,
+                color: DarkColors.headerTextColor,
               ),
               children: [
                 TextSpan(
                   text: "Taherkhany",
                   style: TextStyle(
                     fontSize: 52,
-                    color: Colors.white,
+                    color: DarkColors.headerTextColor,
                   ),
                 ),
               ],
@@ -72,7 +73,7 @@ class NameAndInfoSection extends StatelessWidget {
             "Software Developer",
             style: TextStyle(
               fontSize: 30,
-              color: Colors.grey,
+              color: DarkColors.paragraphTextColor,
             ),
           ),
           SizedBox(
@@ -81,7 +82,7 @@ class NameAndInfoSection extends StatelessWidget {
           Text(
             """Passionate and results-driven Android and Flutter Developer with a strong foundation in mobile application. Proficient in building high- performance, scalable applications using Kotlin for native Android (Jetpack Compose) and Flutter/Dart for cross-platform development.""",
             style: TextStyle(
-              color: Colors.grey,
+              color: DarkColors.paragraphTextColor,
               fontSize: 25,
             ),
           ),

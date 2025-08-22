@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_portfolio/extensions/context_extensions.dart';
+import 'package:my_portfolio/theme/dark_colors.dart';
 import 'package:my_portfolio/widgets/main_footer.dart';
 import 'package:my_portfolio/widgets/main_header.dart';
 import 'package:my_portfolio/widgets/my_information.dart';
@@ -11,7 +12,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: DarkColors.backgroundColor,
       body: CustomScrollView(
         slivers: [
           MainHeader(),
@@ -33,7 +34,7 @@ class MainPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 52,
-                    color: Colors.white,
+                    color: DarkColors.headerTextColor,
                   ),
                 ),
               ],
@@ -59,7 +60,7 @@ class MainPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 52,
-                    color: Colors.white,
+                    color: DarkColors.headerTextColor,
                   ),
                 ),
               ],

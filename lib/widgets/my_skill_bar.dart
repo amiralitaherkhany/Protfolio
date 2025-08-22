@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_portfolio/extensions/context_extensions.dart';
+import 'package:my_portfolio/theme/dark_colors.dart';
 
 class MySkillBar extends StatelessWidget {
   const MySkillBar({
@@ -27,7 +28,7 @@ class MySkillBar extends StatelessWidget {
               shape: RoundedSuperellipseBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              color: Colors.white,
+              color: DarkColors.myWhite,
             ),
             child: Center(
               child: Center(
@@ -42,7 +43,7 @@ class MySkillBar extends StatelessWidget {
           Expanded(
             child: LinearProgressIndicator(
               color: Colors.indigoAccent,
-              backgroundColor: Colors.white,
+              backgroundColor: DarkColors.myWhite,
               value: skill.percentage,
               minHeight: 9,
               borderRadius: BorderRadius.circular(20),
