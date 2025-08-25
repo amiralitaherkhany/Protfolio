@@ -41,12 +41,22 @@ class MySkillBar extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: LinearProgressIndicator(
-              color: Colors.indigoAccent,
-              backgroundColor: DarkColors.myWhite,
-              value: skill.percentage,
-              minHeight: 9,
-              borderRadius: BorderRadius.circular(20),
+            child: TweenAnimationBuilder<double>(
+              tween: Tween(
+                begin: 0,
+                end: skill.percentage,
+              ),
+              curve: Curves.bounceInOut,
+              duration: Duration(seconds: 2),
+              builder: (context, value, child) {
+                return LinearProgressIndicator(
+                  color: Colors.indigoAccent,
+                  backgroundColor: DarkColors.myWhite,
+                  value: value,
+                  minHeight: 9,
+                  borderRadius: BorderRadius.circular(20),
+                );
+              },
             ),
           ),
         ],
