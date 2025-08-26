@@ -31,12 +31,10 @@ class MySkillBar extends StatelessWidget {
               color: DarkColors.myWhite,
             ),
             child: Center(
-              child: Center(
-                child: SvgPicture.asset(
-                  "assets/${skill.name}.svg",
-                  width: 40,
-                  height: 40,
-                ),
+              child: SvgPicture.network(
+                "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${skill.name}/${skill.name}-original.svg",
+                width: 40,
+                height: 40,
               ),
             ),
           ),
