@@ -7,8 +7,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class MainHeader extends StatelessWidget {
   const MainHeader({
+    required this.scrollKeys,
     super.key,
   });
+  final Map<HeaderLink, GlobalKey> scrollKeys;
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -45,61 +47,12 @@ class MainHeader extends StatelessWidget {
                     builder: (context) {
                       switch (context.width) {
                         case >= 1200:
-                          return Row(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            spacing: context.percentageOfWidth(5),
-                            children: [
-                              for (var headerLink in HeaderLinks.values) ...{
-                                Text(
-                                  headerLink.name,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: DarkColors.myGrey,
-                                  ),
-                                ),
-                              },
-                            ],
+                          return DesktopView(
+                            scrollKeys: scrollKeys,
                           );
                         default:
-                          return Row(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            spacing: 15,
-                            children: [
-                              PopupMenuButton<HeaderLinks>(
-                                color: DarkColors.onBackgroundColor,
-                                icon: Icon(
-                                  FontAwesomeIcons.bars,
-                                  color: DarkColors.myGrey,
-                                ),
-                                onSelected: (value) {
-                                  debugPrint(value.name);
-                                },
-                                itemBuilder: (context) => [
-                                  for (var headerLink
-                                      in HeaderLinks.values) ...{
-                                    PopupMenuItem(
-                                      value: headerLink,
-                                      child: Text(
-                                        headerLink.name,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: DarkColors.myGrey,
-                                        ),
-                                      ),
-                                    ),
-                                  },
-                                ],
-                              ),
-                              if (context.width > 530) ...{
-                                AnimatedMyName(),
-                              },
-                            ],
+                          return MobileView(
+                            keys: scrollKeys,
                           );
                       }
                     },
@@ -113,6 +66,146 @@ class MainHeader extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class DesktopView extends StatelessWidget {
+  const DesktopView({
+    super.key,
+    required this.scrollKeys,
+  });
+  final Map<HeaderLink, GlobalKey> scrollKeys;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      spacing: context.percentageOfWidth(5),
+      children: [
+        for (var headerLink in HeaderLink.values) ...{
+          LightedTextButton(
+            headerLinkName: headerLink,
+            onPressed: () => scrollToSection(headerLink, scrollKeys),
+          ),
+        },
+      ],
+    );
+  }
+}
+
+class LightedTextButton extends StatefulWidget {
+  const LightedTextButton({
+    super.key,
+    required this.headerLinkName,
+    required this.onPressed,
+  });
+
+  final HeaderLink headerLinkName;
+  final VoidCallback onPressed;
+
+  @override
+  State<LightedTextButton> createState() => _LightedTextButtonState();
+}
+
+class _LightedTextButtonState extends State<LightedTextButton> {
+  ValueNotifier<bool> isHovered = ValueNotifier<bool>(false);
+  @override
+  Widget build(BuildContext context) {
+    return HoverDetector(
+      onHover: (value) => isHovered.value = value,
+      child: TextButton(
+        onPressed: widget.onPressed,
+        style: TextButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          overlayColor: Colors.transparent,
+        ),
+        child: ListenableBuilder(
+          listenable: isHovered,
+          builder: (context, child) {
+            return Text(
+              widget.headerLinkName.name,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+                color: isHovered.value
+                    ? DarkColors.headerTextColor
+                    : DarkColors.myGrey,
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class MobileView extends StatelessWidget {
+  const MobileView({
+    super.key,
+    required this.keys,
+  });
+  final Map<HeaderLink, GlobalKey> keys;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 15,
+      children: [
+        PopupMenuButton<HeaderLink>(
+          color: DarkColors.onBackgroundColor,
+          icon: Icon(
+            FontAwesomeIcons.bars,
+            color: DarkColors.myGrey,
+          ),
+          onSelected: (value) => scrollToSection(value, keys),
+          itemBuilder: (context) => [
+            for (var headerLink in HeaderLink.values) ...{
+              PopupMenuItem(
+                value: headerLink,
+                child: Text(
+                  headerLink.name,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: DarkColors.myGrey,
+                  ),
+                ),
+              ),
+            },
+          ],
+        ),
+        if (context.width > 530) ...{
+          AnimatedMyName(),
+        },
+      ],
+    );
+  }
+}
+
+void scrollToSection(HeaderLink value, Map<HeaderLink, GlobalKey> keys) {
+  switch (value) {
+    case HeaderLink.skills:
+      Scrollable.ensureVisible(
+        keys[value]!.currentContext!,
+        duration: const Duration(
+          milliseconds: 1000,
+        ),
+        curve: Curves.easeInOut,
+      );
+      break;
+    case HeaderLink.projects:
+      Scrollable.ensureVisible(
+        keys[value]!.currentContext!,
+        duration: const Duration(
+          milliseconds: 1000,
+        ),
+        curve: Curves.easeInOut,
+      );
+      break;
   }
 }
 
@@ -238,31 +331,18 @@ class LightedIconButton extends StatefulWidget {
 
 class _LightedIconButtonState extends State<LightedIconButton> {
   ValueNotifier<bool> ishovered = ValueNotifier(false);
-  void _setHovered(bool isHovered) {
-    if (isHovered) {
-      ishovered.value = true;
-    } else {
-      ishovered.value = false;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => _setHovered(true),
-      onExit: (_) => _setHovered(false),
-      child: GestureDetector(
-        onTapDown: (_) => _setHovered(true),
-        onTapUp: (_) => _setHovered(false),
-        onTapCancel: () => _setHovered(false),
-        child: ListenableBuilder(
+    return HoverDetector(
+      onHover: (value) => ishovered.value = value,
+      child: IconButton(
+        onPressed: widget.onClick,
+        icon: ListenableBuilder(
           listenable: ishovered,
-          builder: (context, child) => IconButton(
-            onPressed: widget.onClick,
-            icon: FaIcon(
-              widget.faIcon,
-              color: ishovered.value ? DarkColors.myWhite : DarkColors.myGrey,
-            ),
+          builder: (context, child) => FaIcon(
+            widget.faIcon,
+            color: ishovered.value ? DarkColors.myWhite : DarkColors.myGrey,
           ),
         ),
       ),
@@ -270,14 +350,30 @@ class _LightedIconButtonState extends State<LightedIconButton> {
   }
 }
 
-enum HeaderLinks {
-  home(name: 'Home', link: ""),
-  caseStudies(name: 'Case Studies', link: ""),
-  testimonials(name: 'Testimonials', link: ""),
-  recentWork(name: 'Recent work', link: ""),
-  getInTouch(name: 'Get In Touch', link: "");
+class HoverDetector extends StatelessWidget {
+  const HoverDetector({super.key, required this.onHover, required this.child});
+  final void Function(bool isHovered) onHover;
+  final Widget child;
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => onHover(true),
+      onExit: (_) => onHover(false),
+      child: GestureDetector(
+        onTapDown: (_) => onHover(true),
+        onTapUp: (_) => onHover(false),
+        onTapCancel: () => onHover(false),
+        child: child,
+      ),
+    );
+  }
+}
 
-  const HeaderLinks({required this.name, required this.link});
+enum HeaderLink {
+  skills(name: 'Skills'),
+  projects(name: 'Projects');
+
+  const HeaderLink({required this.name});
+
   final String name;
-  final String link;
 }
