@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio/constants/link_constants.dart';
 import 'package:my_portfolio/extensions/context_extensions.dart';
 import 'package:my_portfolio/theme/dark_colors.dart';
+import 'package:my_portfolio/widgets/hover_detector.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MainHeader extends StatelessWidget {
@@ -325,25 +326,6 @@ class _LightedIconButtonState extends State<LightedIconButton> {
             color: ishovered.value ? DarkColors.myWhite : DarkColors.myGrey,
           ),
         ),
-      ),
-    );
-  }
-}
-
-class HoverDetector extends StatelessWidget {
-  const HoverDetector({super.key, required this.onHover, required this.child});
-  final void Function(bool isHovered) onHover;
-  final Widget child;
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => onHover(true),
-      onExit: (_) => onHover(false),
-      child: GestureDetector(
-        onTapDown: (_) => onHover(true),
-        onTapUp: (_) => onHover(false),
-        onTapCancel: () => onHover(false),
-        child: child,
       ),
     );
   }
