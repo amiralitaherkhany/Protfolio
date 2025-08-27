@@ -7,10 +7,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 class MainHeader extends StatelessWidget {
   const MainHeader({
-    required this.scrollKeys,
     super.key,
   });
-  final Map<HeaderLink, GlobalKey> scrollKeys;
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -47,13 +45,9 @@ class MainHeader extends StatelessWidget {
                     builder: (context) {
                       switch (context.width) {
                         case >= 1200:
-                          return DesktopView(
-                            scrollKeys: scrollKeys,
-                          );
+                          return DesktopView();
                         default:
-                          return MobileView(
-                            keys: scrollKeys,
-                          );
+                          return MobileView();
                       }
                     },
                   ),
@@ -72,9 +66,7 @@ class MainHeader extends StatelessWidget {
 class DesktopView extends StatelessWidget {
   const DesktopView({
     super.key,
-    required this.scrollKeys,
   });
-  final Map<HeaderLink, GlobalKey> scrollKeys;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -86,7 +78,7 @@ class DesktopView extends StatelessWidget {
         for (var headerLink in HeaderLink.values) ...{
           LightedTextButton(
             headerLinkName: headerLink,
-            onPressed: () => scrollToSection(headerLink, scrollKeys),
+            onPressed: () => scrollToSection(headerLink),
           ),
         },
       ],
@@ -143,9 +135,7 @@ class _LightedTextButtonState extends State<LightedTextButton> {
 class MobileView extends StatelessWidget {
   const MobileView({
     super.key,
-    required this.keys,
   });
-  final Map<HeaderLink, GlobalKey> keys;
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +151,7 @@ class MobileView extends StatelessWidget {
             FontAwesomeIcons.bars,
             color: DarkColors.myGrey,
           ),
-          onSelected: (value) => scrollToSection(value, keys),
+          onSelected: (value) => scrollToSection(value),
           itemBuilder: (context) => [
             for (var headerLink in HeaderLink.values) ...{
               PopupMenuItem(
@@ -186,26 +176,16 @@ class MobileView extends StatelessWidget {
   }
 }
 
-void scrollToSection(HeaderLink value, Map<HeaderLink, GlobalKey> keys) {
-  switch (value) {
-    case HeaderLink.skills:
-      Scrollable.ensureVisible(
-        keys[value]!.currentContext!,
-        duration: const Duration(
-          milliseconds: 1000,
-        ),
-        curve: Curves.easeInOut,
-      );
-      break;
-    case HeaderLink.projects:
-      Scrollable.ensureVisible(
-        keys[value]!.currentContext!,
-        duration: const Duration(
-          milliseconds: 1000,
-        ),
-        curve: Curves.easeInOut,
-      );
-      break;
+void scrollToSection(HeaderLink headerLink) {
+  final context = headerLink.key.currentContext;
+  if (context != null) {
+    Scrollable.ensureVisible(
+      context,
+      duration: const Duration(
+        milliseconds: 1000,
+      ),
+      curve: Curves.easeInOut,
+    );
   }
 }
 
@@ -369,11 +349,14 @@ class HoverDetector extends StatelessWidget {
   }
 }
 
-enum HeaderLink {
-  skills(name: 'Skills'),
-  projects(name: 'Projects');
-
-  const HeaderLink({required this.name});
-
+class HeaderLink {
   final String name;
+  final GlobalKey key;
+
+  const HeaderLink._(this.name, this.key);
+
+  static final skills = HeaderLink._('Skills', GlobalKey());
+  static final projects = HeaderLink._('Projects', GlobalKey());
+
+  static final values = [skills, projects];
 }

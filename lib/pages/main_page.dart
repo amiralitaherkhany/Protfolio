@@ -6,22 +6,8 @@ import 'package:my_portfolio/widgets/main_header.dart';
 import 'package:my_portfolio/widgets/my_information.dart';
 import 'package:my_portfolio/widgets/my_skill_bar.dart';
 
-class MainPage extends StatefulWidget {
+class MainPage extends StatelessWidget {
   const MainPage({super.key});
-
-  @override
-  State<MainPage> createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  final Map<HeaderLink, GlobalKey> scrollKeys = {};
-  @override
-  void initState() {
-    super.initState();
-    for (var headerLink in HeaderLink.values) {
-      scrollKeys[headerLink] = GlobalKey();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +15,7 @@ class _MainPageState extends State<MainPage> {
       backgroundColor: DarkColors.backgroundColor,
       body: CustomScrollView(
         slivers: [
-          MainHeader(
-            scrollKeys: scrollKeys,
-          ),
+          MainHeader(),
           SliverPadding(
             padding: EdgeInsetsGeometry.only(
               top: 60,
@@ -41,7 +25,7 @@ class _MainPageState extends State<MainPage> {
             sliver: MyInformation(),
           ),
           SliverDevider(
-            key: scrollKeys[HeaderLink.skills],
+            key: HeaderLink.skills.key,
           ),
           SliverToBoxAdapter(
             child: Row(
@@ -69,7 +53,7 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
           SliverDevider(
-            key: scrollKeys[HeaderLink.projects],
+            key: HeaderLink.projects.key,
           ),
           SliverToBoxAdapter(
             child: Row(
