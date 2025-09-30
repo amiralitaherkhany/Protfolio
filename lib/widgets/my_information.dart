@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_portfolio/extensions/context_extensions.dart';
 import 'package:my_portfolio/theme/dark_colors.dart';
+import 'package:my_portfolio/widgets/gradiant_text.dart';
 import 'package:my_portfolio/widgets/my_avatar.dart';
 
 class MyInformation extends StatelessWidget {
@@ -69,12 +70,18 @@ class NameAndInfoSection extends StatelessWidget {
               ],
             ),
           ),
-          Text(
+          GradiantText(
             "Software Developer",
             style: TextStyle(
               fontSize: 30,
-              color: DarkColors.paragraphTextColor,
+              color: DarkColors.myWhite,
+              fontWeight: FontWeight.bold,
             ),
+            colors: [
+              Color(0xFF7F7FD5),
+              Color(0xFF86A8E7),
+              Color(0xFF91EAE4),
+            ],
           ),
           SizedBox(
             height: 50,
