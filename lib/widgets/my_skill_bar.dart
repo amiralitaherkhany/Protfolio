@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_portfolio/extensions/context_extensions.dart';
 import 'package:my_portfolio/theme/dark_colors.dart';
-import 'package:vector_graphics/vector_graphics.dart';
 
 class MySkillBar extends StatelessWidget {
   const MySkillBar({
@@ -30,10 +29,11 @@ class MySkillBar extends StatelessWidget {
               ),
               color: DarkColors.myWhite,
             ),
-            child: VectorGraphic(
-              loader: AssetBytesLoader('assets/svg/${skill.name}.svg'),
-              width: 40,
-              height: 40,
+            child: Image.asset(
+              "assets/${skill.name}.png",
+              width: 50,
+              height: 50,
+              filterQuality: FilterQuality.high,
             ),
           ),
           Expanded(
