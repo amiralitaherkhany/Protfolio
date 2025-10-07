@@ -3,7 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio/constants/link_constants.dart';
 import 'package:my_portfolio/extensions/context_extensions.dart';
 import 'package:my_portfolio/theme/dark_colors.dart';
-import 'package:my_portfolio/widgets/hover_detector.dart';
+import 'package:my_portfolio/widgets/lighted_icon_button.dart';
+import 'package:my_portfolio/widgets/lighted_text_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MainHeader extends StatelessWidget {
@@ -78,57 +79,11 @@ class DesktopView extends StatelessWidget {
       children: [
         for (var headerLink in HeaderLink.values) ...{
           LightedTextButton(
-            headerLinkName: headerLink,
+            text: headerLink.name,
             onPressed: () => scrollToSection(headerLink),
           ),
         },
       ],
-    );
-  }
-}
-
-class LightedTextButton extends StatefulWidget {
-  const LightedTextButton({
-    super.key,
-    required this.headerLinkName,
-    required this.onPressed,
-  });
-
-  final HeaderLink headerLinkName;
-  final VoidCallback onPressed;
-
-  @override
-  State<LightedTextButton> createState() => _LightedTextButtonState();
-}
-
-class _LightedTextButtonState extends State<LightedTextButton> {
-  ValueNotifier<bool> isHovered = ValueNotifier<bool>(false);
-  @override
-  Widget build(BuildContext context) {
-    return HoverDetector(
-      onHover: (value) => isHovered.value = value,
-      child: TextButton(
-        onPressed: widget.onPressed,
-        style: TextButton.styleFrom(
-          backgroundColor: Colors.transparent,
-          overlayColor: Colors.transparent,
-        ),
-        child: ListenableBuilder(
-          listenable: isHovered,
-          builder: (context, child) {
-            return Text(
-              widget.headerLinkName.name,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                color: isHovered.value
-                    ? DarkColors.headerTextColor
-                    : DarkColors.myGrey,
-              ),
-            );
-          },
-        ),
-      ),
     );
   }
 }
@@ -272,61 +227,19 @@ class IconRow extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       spacing: 10,
-      children: [
-        LightedIconButton(
-          faIcon: FontAwesomeIcons.linkedinIn,
-          onClick: () {
-            _launchURL(
-              LinkConstants.myLinkedIn,
-            );
-          },
-        ),
-        LightedIconButton(
-          faIcon: FontAwesomeIcons.github,
-          onClick: () {
-            _launchURL(LinkConstants.myGithub);
-          },
-        ),
-        LightedIconButton(
-          faIcon: FontAwesomeIcons.telegram,
-          onClick: () {
-            _launchURL(LinkConstants.myTelegram);
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class LightedIconButton extends StatefulWidget {
-  const LightedIconButton({
-    super.key,
-    required this.faIcon,
-    required this.onClick,
-  });
-  final IconData faIcon;
-  final VoidCallback onClick;
-  @override
-  State<LightedIconButton> createState() => _LightedIconButtonState();
-}
-
-class _LightedIconButtonState extends State<LightedIconButton> {
-  ValueNotifier<bool> ishovered = ValueNotifier(false);
-
-  @override
-  Widget build(BuildContext context) {
-    return HoverDetector(
-      onHover: (value) => ishovered.value = value,
-      child: IconButton(
-        onPressed: widget.onClick,
-        icon: ListenableBuilder(
-          listenable: ishovered,
-          builder: (context, child) => FaIcon(
-            widget.faIcon,
-            color: ishovered.value ? DarkColors.myWhite : DarkColors.myGrey,
-          ),
-        ),
-      ),
+      children: LinkConstants.values.map<Widget>(
+        (e) {
+          return LightedIconButton(
+            faIcon: e.icon,
+            onClick: () {
+              _launchURL(e.url);
+            },
+            color: Colors.grey,
+            hoverColor: Colors.white,
+            toolTip: e.name,
+          );
+        },
+      ).toList(),
     );
   }
 }
