@@ -5,7 +5,7 @@ enum LinkConstants {
   myLinkedIn(
     "https://www.linkedin.com/in/amirali-taherkhany-348925299/",
     "Linkedin",
-    FontAwesomeIcons.linkedin,
+    FontAwesomeIcons.linkedinIn,
   ),
   myGithub(
     "https://github.com/amiralitaherkhany",
