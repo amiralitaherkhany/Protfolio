@@ -72,7 +72,18 @@ class MainPage extends StatelessWidget {
           ),
           SliverPadding(
             padding: EdgeInsetsGeometry.only(
-              top: 150,
+              top: 50,
+              bottom: 50,
+            ),
+            sliver: SliverToBoxAdapter(
+              child: Text(
+                "Working on it...",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: DarkColors.headerTextColor,
+                ),
+              ),
             ),
           ),
           SliverToBoxAdapter(
