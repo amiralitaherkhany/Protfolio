@@ -44,6 +44,7 @@ class MainPage extends StatelessWidget {
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
+              addRepaintBoundaries: true,
               (context, index) {
                 return MySkillBar(
                   skill: Skill.values[index],
