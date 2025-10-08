@@ -62,9 +62,9 @@ class MainPage extends StatelessWidget {
               ),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: _getSkillsGridColumnCount(context),
-                mainAxisExtent: 120,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 50,
+                mainAxisExtent: 75,
+                crossAxisSpacing: 30,
+                mainAxisSpacing: 25,
               ),
             ),
           ),
