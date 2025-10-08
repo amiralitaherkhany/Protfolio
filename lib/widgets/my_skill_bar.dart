@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_portfolio/extensions/context_extensions.dart';
 import 'package:my_portfolio/theme/dark_colors.dart';
 import 'package:my_portfolio/widgets/gradiant_text.dart';
 
@@ -13,70 +12,62 @@ class MySkillBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        vertical: 20.0,
-        horizontal: context.width > 1000
-            ? context.percentageOfWidth(20)
-            : context.percentageOfWidth(5),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        spacing: 10,
-        children: [
-          SizedBox(
-            width: 100,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: ShapeDecoration(
-                    shape: RoundedSuperellipseBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    color: DarkColors.myWhite,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      spacing: 10,
+      children: [
+        SizedBox(
+          width: 100,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.all(10),
+                decoration: ShapeDecoration(
+                  shape: RoundedSuperellipseBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Image.asset(
-                    "assets/${skill.name}.png",
-                    width: 50,
-                    height: 50,
-                    filterQuality: FilterQuality.high,
-                  ),
+                  color: DarkColors.myWhite,
                 ),
-                const SizedBox(
-                  height: 15,
+                child: Image.asset(
+                  "assets/${skill.name}.png",
+                  width: 50,
+                  height: 50,
+                  filterQuality: FilterQuality.high,
                 ),
-                FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: GradiantText(
-                    skill.displayName,
-                    colors: [
-                      Color(0xFF7F7FD5),
-                      Color(0xFF86A8E7),
-                    ],
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: GradiantText(
+                  skill.displayName,
+                  colors: [
+                    Color(0xFF7F7FD5),
+                    Color(0xFF86A8E7),
+                  ],
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          Expanded(
-            child: LinearProgressIndicator(
-              color: Color.fromARGB(255, 1, 104, 183),
-              backgroundColor: DarkColors.myWhite,
-              value: skill.percentage,
-              minHeight: 9,
-              borderRadius: BorderRadius.circular(20),
-            ),
+        ),
+        Expanded(
+          child: LinearProgressIndicator(
+            color: Color.fromARGB(255, 1, 104, 183),
+            backgroundColor: DarkColors.myWhite,
+            value: skill.percentage,
+            minHeight: 9,
+            borderRadius: BorderRadius.circular(20),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

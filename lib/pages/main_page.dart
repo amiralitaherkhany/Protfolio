@@ -42,15 +42,30 @@ class MainPage extends StatelessWidget {
               ],
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              addRepaintBoundaries: true,
-              (context, index) {
-                return MySkillBar(
-                  skill: Skill.values[index],
-                );
-              },
-              childCount: Skill.values.length,
+          SliverPadding(
+            padding: EdgeInsets.symmetric(
+              vertical: 40.0,
+              horizontal: _getSkillsPadding(context),
+            ),
+            sliver: SliverGrid(
+              delegate: SliverChildBuilderDelegate(
+                addRepaintBoundaries: true,
+                childCount: Skill.values.length,
+                (context, index) {
+                  return SizedBox(
+                    width: 500,
+                    child: MySkillBar(
+                      skill: Skill.values[index],
+                    ),
+                  );
+                },
+              ),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: _getSkillsGridColumnCount(context),
+                mainAxisExtent: 120,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 50,
+              ),
             ),
           ),
           SliverDevider(
@@ -93,6 +108,18 @@ class MainPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  int _getSkillsGridColumnCount(BuildContext context) {
+    return (context.width - (2 * _getSkillsPadding(context))) ~/ 500 <= 0
+        ? 1
+        : (context.width - (2 * _getSkillsPadding(context))) ~/ 500;
+  }
+
+  double _getSkillsPadding(BuildContext context) {
+    return context.width > 1000
+        ? context.percentageOfWidth(10)
+        : context.percentageOfWidth(5);
   }
 }
 
