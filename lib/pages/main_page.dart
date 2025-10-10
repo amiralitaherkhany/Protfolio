@@ -5,6 +5,7 @@ import 'package:my_portfolio/widgets/main_footer.dart';
 import 'package:my_portfolio/widgets/main_header.dart';
 import 'package:my_portfolio/widgets/my_information.dart';
 import 'package:my_portfolio/widgets/my_skill_bar.dart';
+import 'package:my_portfolio/widgets/project_viewer.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -92,14 +93,7 @@ class MainPage extends StatelessWidget {
               bottom: 50,
             ),
             sliver: SliverToBoxAdapter(
-              child: Text(
-                "Working on it...",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: DarkColors.headerTextColor,
-                ),
-              ),
+              child: ProjectViewer(),
             ),
           ),
           SliverToBoxAdapter(

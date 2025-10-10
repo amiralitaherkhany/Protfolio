@@ -265,7 +265,7 @@ class _ProjectsSection extends StatelessWidget {
             fontSize: 15,
             color: footerTextColor,
             onPressed: () {
-              _launchURL(e.url);
+              _launchURL(e.repo);
             },
           );
         },
