@@ -62,26 +62,33 @@ class _InfoSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
       children: [
-        const Text(
-          'Amirali Taherkhany',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 26,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1.2,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: const Text(
+            'Amirali Taherkhany',
+            textAlign: TextAlign.start,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.2,
+            ),
           ),
         ),
         const SizedBox(height: 16),
-        SizedBox(
-          width: 260,
-          child: Text(
-            'Transforming ideas into elegant code and purposeful innovation.',
-            style: TextStyle(
-              color: footerTextColor,
-              fontSize: 14,
-              height: 1.4,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: SizedBox(
+            width: 260,
+            child: Text(
+              'Transforming ideas into elegant code and purposeful innovation.',
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                color: footerTextColor,
+                fontSize: 14,
+                height: 1.4,
+              ),
             ),
           ),
         ),
@@ -222,14 +229,9 @@ class _MobileFooter extends StatelessWidget {
       color: footerBackgroundColor,
       padding: const EdgeInsets.symmetric(vertical: 38, horizontal: 24),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const _InfoSection(),
-            ],
-          ),
+          const _InfoSection(),
           const Divider(color: footerTextColor, height: 40),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
