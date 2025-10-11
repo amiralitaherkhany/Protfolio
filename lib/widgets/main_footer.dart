@@ -175,9 +175,9 @@ class _DesktopFooter extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _ProjectsSection(),
-                        const SizedBox(width: 80),
-                        _ConnectSection(),
+                        Expanded(child: Center(child: _ProjectsSection())),
+
+                        Expanded(child: Center(child: _ConnectSection())),
                       ],
                     ),
                   ),

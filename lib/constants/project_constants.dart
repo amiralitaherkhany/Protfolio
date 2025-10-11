@@ -2,23 +2,27 @@ enum ProjectConstants {
   valorantIntel(
     repo: "https://github.com/amiralitaherkhany/valorant-intel",
     name: "Valorant Intel",
+    description:
+        "A visually rich Flutter app that brings all Valorant in-game assets—agents, guns, maps, and more—right to your fingertips, powered by the Valorant API.",
     screenShots: [
-      "${_baseUrl}valorant-intel/master/screenshots/Screenshot_20250611-212130.jpg",
-      "${_baseUrl}valorant-intel/master/screenshots/Screenshot_20250611-212140.jpg",
-      "${_baseUrl}valorant-intel/master/screenshots/Screenshot_20250611-212149.jpg",
-      "${_baseUrl}valorant-intel/master/screenshots/Screenshot_20250611-212156.jpg",
-      "${_baseUrl}valorant-intel/master/screenshots/Screenshot_20250611-212221.jpg",
+      "${_baseUrl}valorant-intel/master/screenshots/1.png",
+      "${_baseUrl}valorant-intel/master/screenshots/2.png",
+      "${_baseUrl}valorant-intel/master/screenshots/3.png",
+      "${_baseUrl}valorant-intel/master/screenshots/4.png",
+      "${_baseUrl}valorant-intel/master/screenshots/5.png",
     ],
   ),
   proTicTacToe(
     repo: "https://github.com/amiralitaherkhany/pro-tic-tac-toe",
     name: "Pro TicTacToe",
+    description:
+        "A Tic Tac Toe game developed with Kotlin and Jetpack Compose for Android. Built as a fun project to explore modern Android development!",
     screenShots: [
-      "${_baseUrl}pro-tic-tac-toe/master/screenshots/game_over.jpg",
-      "${_baseUrl}pro-tic-tac-toe/master/screenshots/main_screen.jpg",
-      "${_baseUrl}pro-tic-tac-toe/master/screenshots/o_turn.jpg",
-      "${_baseUrl}pro-tic-tac-toe/master/screenshots/vs_ai.jpg",
-      "${_baseUrl}pro-tic-tac-toe/master/screenshots/x_turn.jpg",
+      "${_baseUrl}pro-tic-tac-toe/master/screenshots/1.png",
+      "${_baseUrl}pro-tic-tac-toe/master/screenshots/2.png",
+      "${_baseUrl}pro-tic-tac-toe/master/screenshots/3.png",
+      "${_baseUrl}pro-tic-tac-toe/master/screenshots/4.png",
+      "${_baseUrl}pro-tic-tac-toe/master/screenshots/5.png",
     ],
   );
 
@@ -28,8 +32,10 @@ enum ProjectConstants {
     required this.repo,
     required this.name,
     required this.screenShots,
+    required this.description,
   });
   final String name;
   final String repo;
+  final String description;
   final List<String> screenShots;
 }

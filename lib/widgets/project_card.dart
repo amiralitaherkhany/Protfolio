@@ -62,7 +62,6 @@ class _ProjectCardState extends State<ProjectCard> {
   @override
   Widget build(BuildContext context) {
     final project = widget.project;
-
     return MouseRegion(
       onEnter: (_) => _pauseImageTimer(),
       onExit: (_) => _resumeImageTimer(),
@@ -70,16 +69,15 @@ class _ProjectCardState extends State<ProjectCard> {
         margin: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 15),
         decoration: BoxDecoration(
           color: DarkColors.onBackgroundColor,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
+          borderRadius: BorderRadius.circular(20),
         ),
         child: Column(
           children: [
-            Expanded(
-              flex: 70,
+            AspectRatio(
+              aspectRatio: 1,
               child: ClipRRect(
-                borderRadius: BorderRadiusGeometry.only(
-                  topRight: Radius.circular(20),
-                  topLeft: Radius.circular(20),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(20),
                 ),
                 child: Stack(
                   children: [
@@ -89,19 +87,12 @@ class _ProjectCardState extends State<ProjectCard> {
                       itemBuilder: (context, index) {
                         return CachedNetworkImage(
                           imageUrl: project.screenShots[index],
-                          fit: BoxFit.fitWidth,
-                          placeholder: (context, url) {
-                            return Shimmer.fromColors(
-                              baseColor: DarkColors.headerTextColor,
-                              highlightColor: DarkColors.myGrey,
-                              child: Container(
-                                width: double.infinity,
-                                height: double.infinity,
-                                color: Colors.white,
-                                child: SizedBox(),
-                              ),
-                            );
-                          },
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => Shimmer.fromColors(
+                            baseColor: DarkColors.headerTextColor,
+                            highlightColor: DarkColors.myGrey,
+                            child: Container(color: Colors.white),
+                          ),
                         );
                       },
                     ),
@@ -127,38 +118,58 @@ class _ProjectCardState extends State<ProjectCard> {
                 ),
               ),
             ),
+
             Expanded(
-              flex: 30,
               child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadiusGeometry.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.vertical(
+                    bottom: Radius.circular(20),
                   ),
                   color: DarkColors.onBackgroundColor,
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      project.name,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                        color: Colors.white,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                      child: Text(
+                        project.name,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 28,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    TextButton.icon(
-                      onPressed: () {
-                        launchUrl(Uri.parse(project.repo));
-                      },
-                      icon: const Icon(FontAwesomeIcons.github, size: 25),
-                      label: const Text("View on GitHub"),
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.white,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                      child: Text(
+                        project.description,
+                        textAlign: TextAlign.left,
+                        style: const TextStyle(
+                          fontSize: 17,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    const Spacer(),
+                    SizedBox(
+                      height: 50,
+                      child: TextButton.icon(
+                        onPressed: () {
+                          launchUrl(Uri.parse(project.repo));
+                        },
+                        icon: const Icon(FontAwesomeIcons.github, size: 22),
+                        label: const Text(
+                          "View on GitHub",
+                          style: TextStyle(fontSize: 17),
+                        ),
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.black,
+                          backgroundColor: Colors.white,
+                        ),
                       ),
                     ),
                   ],

@@ -48,14 +48,8 @@ class _ProjectViewerState extends State<ProjectViewer> {
     super.dispose();
   }
 
-  double _getViewportFraction(double width) {
-    if (width < 600) return 1;
-    if (width < 1100) return 0.75;
-    return 0.4;
-  }
-
   void _updatePageController(double screenWidth) {
-    final newFraction = _getViewportFraction(screenWidth);
+    final newFraction = _getAdaptiveViewportFraction(screenWidth);
     if (newFraction != _lastViewportFraction) {
       final oldController = _pageController;
       _pageController = PageController(
@@ -111,9 +105,96 @@ class _ProjectViewerState extends State<ProjectViewer> {
     );
   }
 
-  double _getPageViewHeight(double width) {
-    if (width < 600) return 600;
-    if (width < 1100) return 700;
-    return 700;
+  double _getAdaptiveViewportFraction(double screenWidth) {
+    switch (screenWidth) {
+      case < 480:
+        return 1;
+      case < 565:
+        return 0.75;
+
+      case < 679:
+        return 0.80;
+
+      case < 700:
+        return 0.80;
+
+      case < 800:
+        return 0.65;
+
+      case < 900:
+        return 0.55;
+
+      case < 1000:
+        return 0.45;
+
+      case < 1100:
+        return 0.40;
+
+      case < 1200:
+        return 0.38;
+
+      case < 1300:
+        return 0.35;
+
+      case < 1400:
+        return 0.36;
+
+      case < 1600:
+        return 0.37;
+
+      default:
+        return 0.3;
+    }
+  }
+
+  double _getPageViewHeight(double screenWidth) {
+    switch (screenWidth) {
+      case < 300:
+        return 620;
+      case < 400:
+        return 650;
+      case < 480:
+        return 690;
+      case < 565:
+        return 650;
+      case < 632:
+        return 720;
+
+      case < 679:
+        return 740;
+
+      case < 700:
+        return 780;
+
+      case < 800:
+        return 730;
+
+      case < 900:
+        return 700;
+
+      case < 1000:
+        return 680;
+
+      case < 1100:
+        return 660;
+
+      case < 1200:
+        return 680;
+
+      case < 1300:
+        return 700;
+
+      case < 1400:
+        return 700;
+
+      case < 1500:
+        return 750;
+
+      case < 1600:
+        return 800;
+
+      default:
+        return context.percentageOfWidth(30) * 1.44;
+    }
   }
 }
