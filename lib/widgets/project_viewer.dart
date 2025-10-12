@@ -16,34 +16,19 @@ class ProjectViewer extends StatefulWidget {
 
 class _ProjectViewerState extends State<ProjectViewer> {
   PageController? _pageController;
-  late Timer _timer;
-  int _currentPage = 0;
   double _lastViewportFraction = 0.9;
 
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(viewportFraction: _lastViewportFraction);
-
-    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
-      if (_currentPage < ProjectConstants.values.length - 1) {
-        _currentPage++;
-      } else {
-        _currentPage = 0;
-      }
-      if (mounted) {
-        _pageController?.animateToPage(
-          _currentPage,
-          duration: const Duration(milliseconds: 700),
-          curve: Curves.easeInOutCubic,
-        );
-      }
-    });
+    _pageController = PageController(
+      viewportFraction: _lastViewportFraction,
+      keepPage: true,
+    );
   }
 
   @override
   void dispose() {
-    _timer.cancel();
     _pageController?.dispose();
     super.dispose();
   }
@@ -55,6 +40,7 @@ class _ProjectViewerState extends State<ProjectViewer> {
       _pageController = PageController(
         viewportFraction: newFraction,
         initialPage: oldController?.initialPage ?? 0,
+        keepPage: true,
       );
       _lastViewportFraction = newFraction;
       oldController?.dispose();
@@ -72,12 +58,9 @@ class _ProjectViewerState extends State<ProjectViewer> {
       children: [
         SizedBox(
           height: _getPageViewHeight(screenWidth),
-          child: PageView.builder(
-            controller: _pageController,
-            itemCount: projects.length,
-            itemBuilder: (context, index) {
-              return ProjectCard(project: projects[index]);
-            },
+          child: AnimatedPageView(
+            pageController: _pageController!,
+            projects: projects,
           ),
         ),
         const SizedBox(height: 25),
@@ -197,4 +180,72 @@ class _ProjectViewerState extends State<ProjectViewer> {
         return context.percentageOfWidth(30) * 1.44;
     }
   }
+}
+
+class AnimatedPageView extends StatefulWidget {
+  const AnimatedPageView({
+    super.key,
+    required this.pageController,
+    required this.projects,
+  });
+  final PageController pageController;
+  final List<ProjectConstants> projects;
+  @override
+  State<AnimatedPageView> createState() => _AnimatedPageViewState();
+}
+
+class _AnimatedPageViewState extends State<AnimatedPageView>
+    with AutomaticKeepAliveClientMixin {
+  Timer? _timer;
+  int _currentPage = 0;
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  void _startTimer() {
+    _timer?.cancel();
+    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+      if (_currentPage < ProjectConstants.values.length - 1) {
+        _currentPage++;
+      } else {
+        _currentPage = 0;
+      }
+      if (mounted) {
+        widget.pageController.animateToPage(
+          _currentPage,
+          duration: const Duration(milliseconds: 700),
+          curve: Curves.easeInOutCubic,
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return PageView.builder(
+      controller: widget.pageController,
+      onPageChanged: (index) {
+        setState(() {
+          _currentPage = index;
+          _startTimer();
+        });
+      },
+      itemCount: widget.projects.length,
+      itemBuilder: (context, index) {
+        return ProjectCard(project: widget.projects[index]);
+      },
+    );
+  }
+
+  @override
+  bool get wantKeepAlive => true;
 }
