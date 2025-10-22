@@ -1,3 +1,5 @@
+import 'package:my_portfolio/widgets/my_skill_bar.dart';
+
 enum ProjectConstants {
   valorantIntel(
     repo: "https://github.com/amiralitaherkhany/valorant-intel",
@@ -10,6 +12,11 @@ enum ProjectConstants {
       "${_baseUrl}valorant-intel/master/screenshots/3.png",
       "${_baseUrl}valorant-intel/master/screenshots/4.png",
       "${_baseUrl}valorant-intel/master/screenshots/5.png",
+    ],
+    skillNames: [
+      "dart",
+      "flutter",
+      "githubactions",
     ],
   ),
   proTicTacToe(
@@ -24,6 +31,12 @@ enum ProjectConstants {
       "${_baseUrl}pro-tic-tac-toe/master/screenshots/4.png",
       "${_baseUrl}pro-tic-tac-toe/master/screenshots/5.png",
     ],
+    skillNames: [
+      "android",
+      "kotlin",
+      "jetpackcompose",
+      "githubactions",
+    ],
   );
 
   static const _baseUrl =
@@ -33,9 +46,11 @@ enum ProjectConstants {
     required this.name,
     required this.screenShots,
     required this.description,
+    required this.skillNames,
   });
   final String name;
   final String repo;
   final String description;
   final List<String> screenShots;
+  final List<String> skillNames;
 }

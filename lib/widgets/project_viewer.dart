@@ -133,51 +133,54 @@ class _ProjectViewerState extends State<ProjectViewer> {
   double _getPageViewHeight(double screenWidth) {
     switch (screenWidth) {
       case < 300:
-        return 620;
+        return 660;
       case < 400:
-        return 650;
-      case < 480:
         return 690;
+      case < 480:
+        return 730;
       case < 565:
-        return 650;
+        return 690;
       case < 632:
-        return 720;
+        return 760;
 
       case < 679:
-        return 740;
-
-      case < 700:
         return 780;
 
+      case < 700:
+        return 820;
+
       case < 800:
-        return 730;
+        return 770;
 
       case < 900:
-        return 700;
+        return 740;
 
       case < 1000:
-        return 680;
+        return 720;
 
       case < 1100:
-        return 660;
+        return 700;
 
       case < 1200:
-        return 680;
+        return 720;
 
       case < 1300:
-        return 700;
+        return 740;
 
       case < 1400:
-        return 700;
+        return 740;
 
       case < 1500:
-        return 750;
+        return 790;
 
       case < 1600:
-        return 800;
-
+        return 840;
+      case < 1700:
+        return 790;
+      case < 1800:
+        return 810;
       default:
-        return context.percentageOfWidth(30) * 1.44;
+        return context.percentageOfWidth(30) * 1.45;
     }
   }
 }

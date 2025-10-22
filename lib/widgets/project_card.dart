@@ -107,6 +107,23 @@ class _ProjectCardState extends State<ProjectCard> {
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsetsGeometry.symmetric(vertical: 5.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      spacing: 6.0,
+                      children: [
+                        ...project.skillNames.map<Widget>(
+                          (skill) => Image.asset(
+                            "assets/$skill.png",
+                            width: 30,
+                            height: 30,
+                            filterQuality: FilterQuality.low,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   const Spacer(),
                   SizedBox(
                     height: 50,
