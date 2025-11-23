@@ -6,6 +6,7 @@ import 'package:my_portfolio/widgets/main_header.dart';
 import 'package:my_portfolio/widgets/my_information.dart';
 import 'package:my_portfolio/widgets/my_skill_bar.dart';
 import 'package:my_portfolio/widgets/project_viewer.dart';
+import 'package:particles_network/particles_network.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -14,90 +15,113 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: DarkColors.backgroundColor,
-      body: CustomScrollView(
-        slivers: [
-          MainHeader(),
-          SliverPadding(
-            padding: EdgeInsetsGeometry.only(
-              top: 60,
-              right: context.percentageOfWidth(10),
-              left: context.percentageOfWidth(10),
-            ),
-            sliver: MyInformation(),
+      body: Stack(
+        fit: StackFit.expand,
+        alignment: AlignmentGeometry.center,
+        children: [
+          ParticleNetwork(
+            particleCount: 60,
+            maxSpeed: 0.5,
+            maxSize: 1.5,
+            lineWidth: 1,
+            lineDistance: context.width * 0.12 < 100
+                ? 100
+                : context.width * 0.12,
+            particleColor: Colors.blue,
+            lineColor: Colors.white,
+            touchColor: Colors.red,
+            touchActivation: false,
+            drawNetwork: true,
+            fill: false,
+            isComplex: false,
           ),
-          SliverDevider(
-            key: HeaderLink.skills.key,
-          ),
-          SliverToBoxAdapter(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Skills",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 52,
-                    color: DarkColors.headerTextColor,
-                  ),
+          CustomScrollView(
+            physics: BouncingScrollPhysics(),
+            slivers: [
+              MainHeader(),
+              SliverPadding(
+                padding: EdgeInsetsGeometry.only(
+                  top: 60,
+                  right: context.percentageOfWidth(10),
+                  left: context.percentageOfWidth(10),
                 ),
-              ],
-            ),
-          ),
-          SliverPadding(
-            padding: EdgeInsets.symmetric(
-              vertical: 40.0,
-              horizontal: _getSkillsPadding(context),
-            ),
-            sliver: SliverGrid(
-              delegate: SliverChildBuilderDelegate(
-                addRepaintBoundaries: true,
-                childCount: Skill.values.length,
-                (context, index) {
-                  return SizedBox(
-                    width: 500,
-                    child: MySkillBar(
-                      skill: Skill.values[index],
+                sliver: MyInformation(),
+              ),
+              SliverDevider(
+                key: HeaderLink.skills.key,
+              ),
+              SliverToBoxAdapter(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Skills",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 52,
+                        color: DarkColors.headerTextColor,
+                      ),
                     ),
-                  );
-                },
+                  ],
+                ),
               ),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: _getSkillsGridColumnCount(context),
-                mainAxisExtent: 75,
-                crossAxisSpacing: 30,
-                mainAxisSpacing: 25,
-              ),
-            ),
-          ),
-          SliverDevider(
-            key: HeaderLink.projects.key,
-          ),
-          SliverToBoxAdapter(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Projects",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 52,
-                    color: DarkColors.headerTextColor,
+              SliverPadding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 40.0,
+                  horizontal: _getSkillsPadding(context),
+                ),
+                sliver: SliverGrid(
+                  delegate: SliverChildBuilderDelegate(
+                    addRepaintBoundaries: true,
+                    childCount: Skill.values.length,
+                    (context, index) {
+                      return SizedBox(
+                        width: 500,
+                        child: MySkillBar(
+                          skill: Skill.values[index],
+                        ),
+                      );
+                    },
+                  ),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: _getSkillsGridColumnCount(context),
+                    mainAxisExtent: 75,
+                    crossAxisSpacing: 30,
+                    mainAxisSpacing: 25,
                   ),
                 ),
-              ],
-            ),
-          ),
-          SliverPadding(
-            padding: EdgeInsetsGeometry.only(
-              top: 50,
-              bottom: 50,
-            ),
-            sliver: SliverToBoxAdapter(
-              child: ProjectViewer(),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: MainFooter(),
+              ),
+              SliverDevider(
+                key: HeaderLink.projects.key,
+              ),
+              SliverToBoxAdapter(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Projects",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 52,
+                        color: DarkColors.headerTextColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SliverPadding(
+                padding: EdgeInsetsGeometry.only(
+                  top: 50,
+                  bottom: 50,
+                ),
+                sliver: SliverToBoxAdapter(
+                  child: ProjectViewer(),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: MainFooter(),
+              ),
+            ],
           ),
         ],
       ),
