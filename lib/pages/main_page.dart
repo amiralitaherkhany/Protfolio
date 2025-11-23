@@ -36,7 +36,6 @@ class MainPage extends StatelessWidget {
             isComplex: false,
           ),
           CustomScrollView(
-            physics: BouncingScrollPhysics(),
             slivers: [
               MainHeader(),
               SliverPadding(
