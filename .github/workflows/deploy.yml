@@ -21,7 +21,7 @@ jobs:
         run: flutter pub get
 
       - name: Build web
-        run: flutter build web --release --wasm --pwa-strategy=none --base-href "/"
+        run: flutter build web --release --pwa-strategy=none --base-href "/"
         
       - name: Create CNAME file
         run: echo "amiralitaherkhany.ir" > build/web/CNAME
