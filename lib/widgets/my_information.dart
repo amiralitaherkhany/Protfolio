@@ -89,7 +89,7 @@ class NameAndInfoSection extends StatelessWidget {
           Text(
             """Passionate and results-driven Android and Flutter Developer with a strong foundation in mobile application. Proficient in building high- performance, scalable applications using Kotlin for native Android (Jetpack Compose) and Flutter/Dart for cross-platform development.""",
             style: TextStyle(
-              color: DarkColors.paragraphTextColor,
+              color: Color(0xFFF5F5F5),
               fontSize: 25,
             ),
           ),
